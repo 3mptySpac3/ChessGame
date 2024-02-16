@@ -1,0 +1,47 @@
+
+
+body::-webkit-scrollbar{
+  display: none;
+}
+
+:root{
+  --gameboard-size: calc(100vmin - 100px);
+}
+
+/* This is the base styling for the container */
+.chess-container {
+  position: relative;
+  height: 80vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#board2 {
+  max-width: 95vw; /* Limits the size on very wide screens */
+  width: auto; /* Allows it to grow and shrink */
+  height: auto; /* Keeps the aspect ratio */
+}
+
+/* Mobile and small screens */
+@media (max-width: 500px) {
+  #board2 {
+    width: 90vw; /* Takes up a greater width on small screens */
+    height: 90vw; /* Height matches width to maintain aspect ratio */
+  }
+}
+
+/* Buttons - optional styling */
+button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 1rem; /* Responsive font size */
+}
