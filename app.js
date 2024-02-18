@@ -9,7 +9,7 @@ var $status = $('#status');
 var $fen = $('#fen');
 var $pgn = $('#pgn');
 
-function onDragStart(source, piece, position, orientation) {
+function onDragStart( piece) {
   // Do not pick up pieces if the game is over
   if (game.isGameOver()) return false;
 
@@ -143,6 +143,8 @@ var config = {
   draggable: true,
   position: 'start',
   pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
+  moveSpeed: 'slow',
+  snapbackSpeed: 500,
   onDragStart: onDragStart,
   onDrop: onDrop,
   onSnapEnd: onSnapEnd,

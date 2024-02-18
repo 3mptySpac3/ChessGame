@@ -15,25 +15,24 @@ body::-webkit-scrollbar{
   margin-bottom: 10px;
 }
 
-#board2 {
-  max-width: 95vw; /* Limits the size on very wide screens */
-  width: auto; /* Allows it to grow and shrink */
-  height: auto; /* Keeps the aspect ratio */
-}
+
 
 /* Mobile and small screens */
-@media (max-width: 500px) {
-  #board2 {
-    width: 90vw; /* Takes up a greater width on small screens */
-    height: 90vw; /* Height matches width to maintain aspect ratio */
+/* @media (max-width: 500px) {
+  #myBoard {
+    width: 90vw; 
+    height: 90vw; 
   }
-}
+} */
 
 /* Buttons - optional styling */
 button {
   margin: 5px;
   padding: 10px;
   font-size: 1rem; /* Responsive font size */
+  cursor: pointer;
+  background-color: white;
+  border: none;
 }
 
 
@@ -57,7 +56,7 @@ button {
 
 
 .square-55d63.in-check {
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgb(255, 0, 0);
 }
 
 * {
@@ -76,8 +75,8 @@ body, html {
   margin-left: 10%; /* Make the main content start after the sidebar */
   width: 90%;
   padding: 10px 0;
-  background-color: #ddd;
   position: relative;
+  border-bottom: #000 1px solid;
 }
 
 .burger{
@@ -110,7 +109,7 @@ body, html {
   justify-content: center; /* Space out the content vertically */
   align-items: center;
   padding: 10px;
-  box-shadow: 2px 0px 5px rgba(0,0,0,0.2); /* Optional: Adds a shadow to the sidebar */
+  border-right: black 1px solid;
 }
 
 .btn-link {
@@ -118,17 +117,11 @@ body, html {
   margin: 10px 0; /* Space between links */
   padding: 10px 20px; /* Padding inside links */
   text-align: center; /* Center text */
-  background-color: #f2f2f2; /* Button-like background */
   color: #000; /* Button text color */
   text-decoration: none; /* Remove underline from links */
-  border: 1px solid #ddd; /* Button-like border */
   border-radius: 4px; /* Rounded corners */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
-.btn-link:hover {
-  background-color: #e0e0e0; /* Slightly darker on hover */
-}
 
 
 .main-content {
@@ -143,8 +136,7 @@ body, html {
 .right-move-tracker {
   width: 20%; /* Or 10%, adjust as needed */
   height: auto; /* Let it define its height by its content, or set a specific height if needed */
-  background-color: #f7f7f7;
-  border-left: 2px solid #000;
+  border: 1px solid #000;
   padding: 10px;
   box-shadow: -2px 0px 5px rgba(0,0,0,0.2);
   margin-right: 2%;
