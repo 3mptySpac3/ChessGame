@@ -10,17 +10,38 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Chess Game</h1>
-    <div class="button-container">
-      <button id="startBtn">Start Game</button>
-      <button id="clearBtn">Clear Board</button>
+  <div class="header">
+    Header
+    <div id="burger" class="burger">&#9776;</div>
+    <div class="overlay" id="overlay" style="display: none;"></div>
+  </div>
+
+
+    <div class="left-sidebar">
+      <div class="left-sidebar">
+        <a href="/index.html" class="btn-link">1 v 1</a>
+        <a href="./pages/manvai.html" class="btn-link">Man v AI</a>
+        <a href="./pages/learn.html" class="btn-link">Learn</a>
+      </div>
     </div>
-    <div class="chess-container">
-      <div id="myBoard" style="width: 400px"></div>
-    </div>
-    <div id="status"></div>
-    <div id="fen"></div>
-    <div id="pgn"></div>
+
+    <div class="main-content">
+
+      <div class="chessboard-container">
+        <div class="button-container">
+          <button id="startBtn">Start Game</button>
+          <button id="clearBtn">Clear Board</button>
+      </div>
+          <div id="myBoard" style="width: 400px"></div>
+          <div class="right-move-tracker">
+              <div>
+                  <div id="status"></div>
+                  <div id="pgn"></div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
 
     <!-- Include chessboard.js (Uncomment if needed) -->
     <script src="./chessboardjs-1.0.0/js/chessboard-1.0.0.min.js"></script>

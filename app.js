@@ -81,7 +81,6 @@ function updateStatus() {
   if (game.isCheckmate()) {
     status = 'Game over, ' + moveColor + ' is in checkmate.';
     // Add red glow to the king's square
-    var kingPos = game.turn() === 'w' ? game.find('K') : game.find('k');
     $('#myBoard .square-' + kingPos).addClass('in-check');
   }
   // Draw?
