@@ -47,13 +47,42 @@ function onSnapEnd() {
   board.position(game.fen());
 }
 
+function getKingPosition(color) {
+  // Loop through all squares to find the king's position
+  for (var i = 0; i < 8; i++) {
+    for (var j = 0; j < 8; j++) {
+      var square = String.fromCharCode('a'.charCodeAt(0) + j) + (i + 1);
+      var piece = game.get(square);
+      if (piece && piece.type === 'k' && piece.color === color) {
+        return square;
+      }
+    }
+  }
+  return null; // If no king is found 
+}
+
+// Update the game status
 function updateStatus() {
   var status = '';
   var moveColor = game.turn() === 'b' ? 'Black' : 'White';
 
+
+  // Remove red glow from any square
+  $('.square-55d63').removeClass('in-check');
+
+  // Find the king's position using the custom function
+  var kingPos = getKingPosition(game.turn() === 'w' ? 'w' : 'b');
+  if (game.inCheck()) {
+    // If the king is in check, add the red glow class
+    $('#myBoard .square-' + kingPos).addClass('in-check');
+  }
+
   // Checkmate?
   if (game.isCheckmate()) {
     status = 'Game over, ' + moveColor + ' is in checkmate.';
+    // Add red glow to the king's square
+    var kingPos = game.turn() === 'w' ? game.find('K') : game.find('k');
+    $('#myBoard .square-' + kingPos).addClass('in-check');
   }
   // Draw?
   else if (game.isDraw()) {
@@ -62,6 +91,8 @@ function updateStatus() {
   // Game still on
   else {
     status = moveColor + ' to move';
+
+
     // Check?
     if (game.inCheck()) {
       status += ', ' + moveColor + ' is in check';
@@ -75,6 +106,38 @@ function updateStatus() {
   
 }
 
+function removeGraySquares(){
+  $('#myBoard .square-55d63').removeClass('highlight')
+}
+
+function graySquare(square){
+  $('#myBoard .square-' + square).addClass('highlight')
+}
+
+function onMouseoverSquare(square, piece){
+  // Get list of possible moves for this square
+  var moves = game.moves({
+    square: square,
+    verbose: true
+  })
+
+  // Exit if there are no moves available for this square
+  if(moves.length === 0) return
+
+
+
+  // Highlight the possible squares for this piece with a gray dot
+  for (var i = 0; i < moves.length; i++) {
+    if (moves[i].from !== moves[i].to) { // Make sure we don't highlight the current square
+      graySquare(moves[i].to);
+    }
+  }
+
+}
+
+function onMouseoutSquare(square, piece){
+  removeGraySquares()
+}
 
 
 var config = {
@@ -83,7 +146,10 @@ var config = {
   pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
   onDragStart: onDragStart,
   onDrop: onDrop,
-  onSnapEnd: onSnapEnd
+  onSnapEnd: onSnapEnd,
+  onMouseoutSquare: onMouseoutSquare,
+  onMouseoverSquare: onMouseoverSquare
+
 };
 board = Chessboard('myBoard', config);
 
@@ -100,5 +166,7 @@ $('#clearBtn').on('click', function() {
     game.clear();
     board.clear();
 });
+
+
 
 

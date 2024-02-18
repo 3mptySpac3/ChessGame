@@ -8,6 +8,7 @@ body::-webkit-scrollbar{
   --gameboard-size: calc(100vmin - 100px);
 }
 
+
 /* This is the base styling for the container */
 .chess-container {
   position: relative;
@@ -46,4 +47,28 @@ button {
   margin: 5px;
   padding: 10px;
   font-size: 1rem; /* Responsive font size */
+}
+
+
+/* Legal move highlighting */
+.square-55d63::before{
+  content: '';
+  position: absolute;
+  width: 15px; /*dot size*/
+  height: 15px; /*dot size*/
+  background-color: rgba(79, 79, 79, 0.368); /* gray color with 50% opacity */
+  border-radius: 50%; /*shape of dot...round*/
+  top: 50%; /*position of dot*/
+  left: 50%; /*position of dot*/
+  transform: translate(-50%, -50%); /*position of dot*/
+  display: none; /*hides dot*/
+}
+
+.square-55d63.highlight::before {
+  display: block; /* Show the dot when highlighting */
+}
+
+
+.square-55d63.in-check {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
