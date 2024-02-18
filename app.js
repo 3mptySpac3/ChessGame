@@ -166,6 +166,29 @@ $('#clearBtn').on('click', function() {
     board.clear();
 });
 
+$('#toggleOrientationBtn').on('click', function() {
+  var currentOrientation = board.orientation();
+  var newOrientation = currentOrientation === 'white' ? 'black' : 'white';
+  board.orientation(newOrientation);
+});
 
-// testing 
+document.addEventListener('DOMContentLoaded', function(){
+  // Add event listeners for the burger icon
+  document.getElementById('burger').addEventListener('click', function(){
+    var overlay = document.getElementById('overlay');
+
+    if (overlay.style.display === 'none'){
+      overlay.style.display = 'block';
+    }else{
+      overlay.style.display = 'none';
+    }
+  });
+
+  window.addEventListener('click', function(e) {
+    var overlay = document.getElementById('overlay');
+    if (e.target === overlay){
+      overlay.style.display = 'none';
+    }
+  });
+});
 
