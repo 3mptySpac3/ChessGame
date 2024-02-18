@@ -1,75 +1,104 @@
-
 import $ from 'jquery';
 import { Chess } from 'chess.js';
 
+var board = Chessboard('myBoard', config);
+var game = new Chess();
+console.log(game); // Check the logged output for available methods
 
-const game = new Chess();
+var $status = $('#status');
+var $fen = $('#fen');
+var $pgn = $('#pgn');
 
-// Configuration object for the Chessboard.js
-var boardConfig = {
-  draggable: true,
-  position: 'start',
-  pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
-  // This event is called after the piece is dropped on the board
-  onDrop: function(source, target, piece, newPos, oldPos, orientation) {
-    // See if the move is legal
+function onDragStart(source, piece, position, orientation) {
+  // Do not pick up pieces if the game is over
+  if (game.isGameOver()) return false;
+
+  // Only pick up pieces for the side to move
+  if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+      (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+    return false;
+  }
+}
+
+function onDrop(source, target) {
+  // Check if the target is "offboard" and silently ignore the move
+  if (source === target) {
+    return 'snapback';
+}
+  // See if the move is legal
+  try {
     var move = game.move({
       from: source,
       to: target,
-      promotion: 'q' // NOTE: always promote to a queen for example simplicity
+      promotion: 'q' // NOTE: Always promote to a queen for example simplicity
     });
 
-    // Illegal move
-    if (move === null) return 'snapback';
-    
-    // Log the move
-    console.log(move);
-    
-    // Handle end of game scenarios like checkmate or stalemate here
-    if (game.in_checkmate()) {
-      console.log('Checkmate');
-    } else if (game.in_draw()) {
-      console.log('Draw');
-    }
-  },
-  // Update board positions after a move
-  onSnapEnd: function() {
-    board.position(game.fen());
+    if (move === null) throw new Error('Invalid move');
+  } catch (error) {
+    console.log(error.message); // This logs to the console instead of throwing an error that would trigger the overlay
+    return 'snapback';
   }
-};
 
-// Initialize the Chessboard.js board
-var board = Chessboard('board2', boardConfig)
-
-
-var board2 = Chessboard('board2', {
-  draggable: true,
-  dropOffBoard: 'trash',
-  sparePieces: true,
-  pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
-})
-
-$('#startBtn').on('click', board2.start)
-$('#clearBtn').on('click', board2.clear)
-
-// Resize the board based on the current width
-function resizeBoard() {
-  // Calculate the maximum width the board can have
-  const boardWidth = Math.min(
-    document.querySelector('.chess-container').clientWidth,
-    window.innerWidth * 0.95 // 95% of the viewport width
-  );
-  // Set the board size based on the calculated width
-  board.resize(boardWidth);
+  updateStatus();
 }
 
-// Call resizeBoard on window resize
-window.addEventListener('resize', resizeBoard);
+function onSnapEnd() {
+  // Update the board position after the piece snap for castling, en passant, pawn promotion
+  board.position(game.fen());
+}
 
-// Initial resize
-resizeBoard();
+function updateStatus() {
+  var status = '';
+  var moveColor = game.turn() === 'b' ? 'Black' : 'White';
+
+  // Checkmate?
+  if (game.isCheckmate()) {
+    status = 'Game over, ' + moveColor + ' is in checkmate.';
+  }
+  // Draw?
+  else if (game.isDraw()) {
+    status = 'Game over, drawn position';
+  }
+  // Game still on
+  else {
+    status = moveColor + ' to move';
+    // Check?
+    if (game.inCheck()) {
+      status += ', ' + moveColor + ' is in check';
+    }
+  }
+
+  $status.html(status);
+  $fen.html(game.fen());
+  $pgn.html(game.pgn());
+
+  
+}
 
 
 
-export default board2;
+var config = {
+  draggable: true,
+  position: 'start',
+  pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onSnapEnd: onSnapEnd
+};
+board = Chessboard('myBoard', config);
+
+updateStatus();
+
+// Event handlers for buttons
+$('#startBtn').on('click', function() {
+    game.reset();
+    board.start();
+    updateStatus();
+});
+
+$('#clearBtn').on('click', function() {
+    game.clear();
+    board.clear();
+});
+
 

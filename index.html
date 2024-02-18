@@ -12,15 +12,19 @@
 <body>
     <h1>Chess Game</h1>
     <div class="button-container">
-      <button id="startBtn">Start Position</button>
+      <button id="startBtn">Start Game</button>
       <button id="clearBtn">Clear Board</button>
     </div>
     <div class="chess-container">
-      <div id="board2" style="width: 400px"></div>
+      <div id="myBoard" style="width: 400px"></div>
     </div>
+    <div id="status"></div>
+    <div id="fen"></div>
+    <div id="pgn"></div>
 
     <!-- Include chessboard.js (Uncomment if needed) -->
     <script src="./chessboardjs-1.0.0/js/chessboard-1.0.0.min.js"></script>
+    <script src="./chessboardjs-1.0.0/js/chessboard-1.0.0.js"></script>
     <!-- Include your bundled app logic -->
     <script src="bundle.js"></script>
 </body>
