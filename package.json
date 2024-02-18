@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js",
-    "start": "webpack serve --open"
+    "build": "npx webpack --config webpack.config.js",
+    "start": "npx webpack serve --open"
   },
   "keywords": [],
   "author": "",
@@ -21,3 +21,4 @@
     "webpack-dev-server": "^5.0.1"
   }
 }
+
