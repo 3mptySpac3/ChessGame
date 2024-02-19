@@ -13,6 +13,23 @@ document.addEventListener('DOMContentLoaded', function() {
 	var $status = $('#status');
 	var $fen = $('#fen');
 	var $pgn = $('#pgn');
+
+    // Set up the event listeners for the anchor elements
+    startBtn.addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default anchor action
+      // Start game code...
+    });
+  
+    toggleOrientationBtn.addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default anchor action
+      // Toggle orientation code...
+    });
+  
+    clearBtn.addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default anchor action
+      // Clear board code...
+    });
+    
 	// Function to handle computer move
 	function makeRandomMove() {
 		var possibleMoves = game.moves();

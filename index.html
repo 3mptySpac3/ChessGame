@@ -12,23 +12,46 @@
 </head>
 
 <body>
-	<div class="header"> D'Chess
+	<div class="header"> 
+    <div class="title-container">
+      <span class="t-btn">D'Chess</span>
+    </div>
 		<div id="burger" class="burger">&#9776;</div>
 	</div>
+  
+
 	<div class="overlay" id="overlay" style="display: none;">
 		<button id="playComputerBtn">Play Against Computer</button>
 		<button id="chooseWhiteBtn">Play as White</button>
 		<button id="chooseBlackBtn">Play as Black</button>
 	</div>
 	<div class="left-sidebar">
-		<button id="startBtn">Start Game</button>
-		<button id="toggleOrientationBtn">Toggle Orientation</button>
-		<button id="clearBtn">Clear Board</button>
+    <a href="#" id="startBtn" class="button type--A">
+      <div class="button__line"></div>
+      <div class="button__line"></div>
+      <span class="button__text">Start Game</span>
+      <div class="button__drow1"></div>
+      <div class="button__drow2"></div>
+    </a>
+    <a href="#" id="toggleOrientationBtn" class="button type--B">
+      <div class="button__line"></div>
+      <div class="button__line"></div>
+      <span class="button__text">Orientation</span>
+      <div class="button__drow1"></div>
+      <div class="button__drow2"></div>
+    </a>
+    <a href="#" id="clearBtn" class="button type--C">
+      <div class="button__line"></div>
+      <div class="button__line"></div>
+      <span class="button__text">Clear Board</span>
+      <div class="button__drow1"></div>
+      <div class="button__drow2"></div>
+    </a>
 	</div>
 	<div class="main-content">
 		<div class="chessboard-container">
 			<div id="computerStatus"></div>
-			<div id="myBoard" style="width: 400px"></div>
+			<div id="myBoard" ></div>
 			<div class="right-move-tracker">
 				<div>
 					<div id="status"></div>
