@@ -1,6 +1,10 @@
 import $ from 'jquery';
 import { Chess } from 'chess.js';
 
+document.addEventListener('DOMContentLoaded', function(){
+  var game = new Chess();
+  console.log(game); // Check the logged output for available methods
+
 var board = Chessboard('myBoard', config);
 var game = new Chess();
 console.log(game); // Check the logged output for available methods
@@ -138,23 +142,24 @@ function onMouseoutSquare(square, piece){
   removeGraySquares()
 }
 
+if (document.getElementById('myBoard')){
+  var config = {
+    draggable: true,
+    position: 'start',
+    pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
+    moveSpeed: 'slow',
+    snapbackSpeed: 500,
+    onDragStart: onDragStart,
+    onDrop: onDrop,
+    onSnapEnd: onSnapEnd,
+    onMouseoutSquare: onMouseoutSquare,
+    onMouseoverSquare: onMouseoverSquare
 
-var config = {
-  draggable: true,
-  position: 'start',
-  pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
-  moveSpeed: 'slow',
-  snapbackSpeed: 500,
-  onDragStart: onDragStart,
-  onDrop: onDrop,
-  onSnapEnd: onSnapEnd,
-  onMouseoutSquare: onMouseoutSquare,
-  onMouseoverSquare: onMouseoverSquare
-
-};
-board = Chessboard('myBoard', config);
+  };
+  board = Chessboard('myBoard', config);
 
 updateStatus();
+}
 
 // Event handlers for buttons
 $('#startBtn').on('click', function() {
@@ -194,3 +199,6 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 
+
+
+}); // End of DOMContentLoaded

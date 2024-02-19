@@ -74,6 +74,7 @@ body, html {
 .header {
   margin-left: 10%; /* Make the main content start after the sidebar */
   width: 90%;
+  height: 10%;
   padding: 10px 0;
   position: relative;
   border-bottom: #000 1px solid;
