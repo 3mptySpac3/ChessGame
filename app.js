@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault(); // Prevent default anchor action
       // Clear board code...
     });
-    
+
 	// Function to handle computer move
 	function makeRandomMove() {
 		var possibleMoves = game.moves();
@@ -212,25 +212,28 @@ document.addEventListener('DOMContentLoaded', function() {
 		var newOrientation = currentOrientation === 'white' ? 'black' : 'white';
 		board.orientation(newOrientation);
 	});
-	document.addEventListener('DOMContentLoaded', function() {
-		var burger = document.getElementById('burger');
-		var overlay = document.getElementById('overlay');
-		burger.addEventListener('click', function() {
-			overlay.style.display = (overlay.style.display === 'block') ? 'none' : 'block';
-		});
-		// Close the overlay when clicking anywhere except the burger
-		window.addEventListener('click', function(e) {
-			if(e.target === overlay) {
-				overlay.style.display = 'none';
-			}
-		});
-		// Prevent clicks on the burger from propagating to the window
-		burger.addEventListener('click', function(e) {
-			e.stopPropagation();
-		});
-	});
-	burger.addEventListener('click', function(e) {
-		e.stopPropagation();
-		overlay.style.display = (overlay.style.display === 'block') ? 'none' : 'block';
-	});
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var burger = document.getElementById('burger');
+    var overlay = document.getElementById('overlay');
+  
+    burger.addEventListener('click', function() {
+      // Toggle the 'active' class on the overlay when the burger is clicked
+      overlay.classList.toggle('active');
+      overlay.style.right = overlay.classList.contains('active') ? "0" : "-30%";
+    });
+  
+    // Close the overlay when clicking anywhere except the burger
+    window.addEventListener('click', function(e) {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+        overlay.style.right = "-30%";
+      }
+    });
+  
+    // Prevent clicks on the burger from propagating to the window
+    burger.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  });
 }); // End of DOMContentLoaded

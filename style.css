@@ -6,6 +6,119 @@ body::-webkit-scrollbar {
 	--gameboard-size: calc(100vmin - 100px);
 }
 
+@media (max-width: 600px) {
+  .chessboard-container, .button-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    font-size: 24px; /* Smaller font size on small devices */
+  }
+  .button, .t-btn {
+    font-size: 16px; /* Adjust button text size */
+  }
+}
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { 
+  /* Adjustments for small devices */
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+  /* Adjustments for medium devices */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+  /* Adjustments for large devices */
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  /* Adjustments for extra large devices */
+}
+
+/* Media queries for small screens */
+@media (max-width: 800px) {
+  /* Flexbox properties for main content and sidebar alignment */
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-content {
+    width: 100%;
+    order: 1; /* Ensures main content comes first */
+    padding: 10px;
+    margin-top: 10px; /* Adds a little space on top */
+  }
+
+  .left-sidebar {
+    order: 2; /* Ensures sidebar comes after main content */
+    width: calc(100% - 20px); /* Full width minus padding */
+    margin-top: 10px; /* 10px space between main content and sidebar */
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding is included in width */
+    flex-direction: row; /* Layout buttons in a row */
+    justify-content: center; /* Center buttons horizontally */
+    flex-wrap: wrap; /* Wrap buttons to next line if they don't fit */
+  }
+
+  .left-sidebar a {
+    margin: 5px; /* Spacing between buttons */
+    flex-grow: 1; /* Buttons grow to fill space */
+    text-align: center; /* Center text in buttons */
+  }
+
+  .right-move-tracker {
+    order: 3; /* Ensures move tracker comes last */
+    width: 100%;
+    margin-top: 10px; /* Space between sidebar and move tracker */
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Ensure that the overlay does not cover the content */
+  .overlay {
+    position: absolute; /* or 'static' depending on your layout needs */
+    width: 100%; /* Full width */
+    top: 0;
+    right: 0; /* Reset right position */
+    height: auto; /* Adjust height as necessary */
+    z-index: 10; /* Lower z-index if it should not cover other elements */
+  }
+
+  /* Adjustments for the hamburger menu */
+  .hamburger {
+    display: block; /* Show hamburger */
+    margin-left: auto; /* Align to the right */
+  }
+}
+
+
+
+
+body, html {
+  height: 100%; /* Give a specific height to the body to allow percentage heights for children */
+}
+
+/* body{
+  display: flex;
+  flex-direction: column;
+align-items: center;
+} */
+
+/* .left-sidebar,
+.main-content,
+.right-move-tracker {
+  width: 100%; /* Full width on smaller screens */
+/* } */
+
 .button-container {
 	display: flex;
 	justify-content: center;
@@ -51,17 +164,18 @@ body::-webkit-scrollbar {
  /* This ensures padding doesn't affect the overall width */
 }
 
-body, html {
-  height: 100%; /* Give a specific height to the body to allow percentage heights for children */
-}
+
 
 
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-left: 10%; /* Make the main content start after the sidebar */
   width: 90%;
   height: 10%;
-  padding: 10px 0;
+  padding: 10px 10px;
   position: relative;
   font-size: 50px;
   font-family: 'Courier New', Courier, monospace;
@@ -113,24 +227,59 @@ cursor:pointer;
   align-items:center;
 }
 
-.burger{
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+.hamburger {
   cursor: pointer;
-  font-size: 24px;
-  z-index: 101; /* Higher than the overlay */
+  width: 36px;
+  height: 24px;
+}
+
+.hamburger__container {
+  position: relative;
+  padding-right: 10px;
+}
+
+.hamburger__inner {
+  background-color: #333; /* Color of the hamburger lines */
+  height: 2px; /* Height of the lines */
+  margin: 6px 0; /* Spacing between the lines */
+  transition: transform 0.4s ease;
+}
+
+/* Hover effect for lines */
+.hamburger:hover .hamburger__inner:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger:hover .hamburger__inner:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger:hover .hamburger__inner:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Active state */
+.hamburger.active .hamburger__inner:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active .hamburger__inner:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .hamburger__inner:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 .overlay {
-  position: fixed; /* Position the overlay fixed over the whole screen */
+  position: fixed;
   top: 0;
-  left: 0;
-  width: 100vw;
+  right: -30%; /* Start off-screen to the right */
+  width: 30%; /* Take up 30% of the screen width */
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  z-index: 100; /* Make sure it's above everything else */;
+  background-color: red; /* Background color changed to red for visibility */
+  z-index: 100;
+  transition: right 0.3s ease-in-out; /* Animate the right property */
 }
 
 .left-sidebar {
@@ -215,29 +364,34 @@ button {
  /* Let it define its height by its content, or set a specific height if needed */
 	border: 1px solid #000;
 	padding: 10px;
-	box-shadow: -2px 0px 5px rgba(0,0,0,0.2);
-	margin-right: 2%;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+      	margin-right: 2%;
 }
 
 .chessboard-container {
 	display: flex;
-	flex-direction: row;
  /* This makes children (chessboard and move tracker) align horizontally */
-	justify-content: space-between;
  /* Center the content horizontally */
 	align-items: flex-start;
  /* Align the content to the top */
-	width: 100%;
- /* Full width of the main-content */;
+	width: 50vw;
+
+
 }
 
 #myBoard {
-  /* Adjust width as needed, keeping in mind the size of the move tracker */
-	width: 35%;
- /* This will be the actual width of the chessboard */
-	margin: 0 auto;
- /* Center the chessboard */;
+  width: 70vw; 
+  max-width: 60%; /* Maximum size */
+  margin: 0 auto;
+  box-shadow: #473628 0px 0px 10px;
+  transition: box-shadow 0.3s ease-in-out;
 }
+
+#myBoard:hover {
+  box-shadow: black 0px 0px 10px;
+}
+
+
 
 #computerStatus{
   color: black;
