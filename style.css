@@ -6,41 +6,7 @@ body::-webkit-scrollbar {
 	--gameboard-size: calc(100vmin - 100px);
 }
 
-@media (max-width: 600px) {
-  .chessboard-container, .button-container {
-    flex-direction: column;
-  }
-}
 
-@media (max-width: 600px) {
-  .header {
-    font-size: 24px; /* Smaller font size on small devices */
-  }
-  .button, .t-btn {
-    font-size: 16px; /* Adjust button text size */
-  }
-}
-
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) { 
-  /* Adjustments for small devices */
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) { 
-  /* Adjustments for medium devices */
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) { 
-  /* Adjustments for large devices */
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) { 
-  /* Adjustments for extra large devices */
-}
 
 /* Media queries for small screens */
 @media (max-width: 800px) {
@@ -99,7 +65,7 @@ body::-webkit-scrollbar {
     margin-left: auto; /* Align to the right */
   }
 }
-
+ 
 
 
 
@@ -181,6 +147,8 @@ align-items: center;
   font-family: 'Courier New', Courier, monospace;
   color:black;
 }
+
+
 
 .t-btn{
 cursor:pointer;
@@ -365,7 +333,7 @@ button {
 	border: 1px solid #000;
 	padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
-      	margin-right: 2%;
+  margin-right: 2%;
 }
 
 .chessboard-container {
