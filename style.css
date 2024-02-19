@@ -22,7 +22,7 @@
 
   .mobile-only-image img {
     width: 100%; /* Stretch the image to fill the container */
-    height: auto%; /* Keep the aspect ratio */
+    height: 100%; /* Keep the aspect ratio */
   }
 }
 
