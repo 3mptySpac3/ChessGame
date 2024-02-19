@@ -52,7 +52,7 @@ function chooseColor(color) {
   document.getElementById('chooseWhiteBtn').addEventListener('click', function() { chooseColor('w'); });
   document.getElementById('chooseBlackBtn').addEventListener('click', function() { chooseColor('b'); });
 
-function onDragStart( piece) {
+function onDragStart( source,piece) {
   // Do not pick up pieces if the game is over
   if (game.isGameOver()) return false;
 
@@ -114,8 +114,8 @@ function updateStatus() {
   var status = '';
   var moveColor = game.turn() === 'b' ? 'Black' : 'White';
 
-  var computerStatus = computerPlayer ? 'Computer is playing' : 'Computer is not playing';
-    $('#computerStatus').html(computerStatus);
+  // var computerStatus = computerPlayer ? 'Computer is playing' : 'Computer is not playing';
+  //   $('#computerStatus').html(computerStatus);
 
   // Remove red glow from any square
   $('.square-55d63').removeClass('in-check');
