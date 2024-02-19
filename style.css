@@ -13,7 +13,7 @@
   .mobile-only-image {
     display: block; /* Or 'flex' or 'grid' if you want to use those display types */
     width: 100%; /* Take the full width of the screen */
-    height: 100vh; /* Optional: Takes the full height of the viewport */
+    height: 100%; /* Optional: Takes the full height of the viewport */
     position: absolute; /* Position it over other content */
     top: 0;
     left: 0;
@@ -22,7 +22,7 @@
 
   .mobile-only-image img {
     width: 100%; /* Stretch the image to fill the container */
-    height: auto; /* Keep the aspect ratio */
+    height: 100%; /* Keep the aspect ratio */
   }
 }
 
