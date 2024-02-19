@@ -1,3 +1,33 @@
+.mobile-only-image {
+  display: none;
+}
+
+/* Media Query for small screens */
+@media (max-width: 600px) {
+  /* Hide regular content */
+  .header, .main-content, .left-sidebar, .right-move-tracker, .overlay, .hamburger {
+    display: none;
+  }
+
+  /* Show the mobile-only image */
+  .mobile-only-image {
+    display: block; /* Or 'flex' or 'grid' if you want to use those display types */
+    width: 100%; /* Take the full width of the screen */
+    height: 100vh; /* Optional: Takes the full height of the viewport */
+    position: absolute; /* Position it over other content */
+    top: 0;
+    left: 0;
+    z-index: 10; /* Make sure it's on top of other elements */
+  }
+
+  .mobile-only-image img {
+    width: 100%; /* Stretch the image to fill the container */
+    height: auto; /* Keep the aspect ratio */
+  }
+}
+
+
+
 body::-webkit-scrollbar {
 	display: none;
 }
@@ -8,63 +38,7 @@ body::-webkit-scrollbar {
 
 
 
-/* Media queries for small screens */
-@media (max-width: 800px) {
-  /* Flexbox properties for main content and sidebar alignment */
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .main-content {
-    width: 100%;
-    order: 1; /* Ensures main content comes first */
-    padding: 10px;
-    margin-top: 10px; /* Adds a little space on top */
-  }
-
-  .left-sidebar {
-    order: 2; /* Ensures sidebar comes after main content */
-    width: calc(100% - 20px); /* Full width minus padding */
-    margin-top: 10px; /* 10px space between main content and sidebar */
-    padding: 10px;
-    box-sizing: border-box; /* Ensures padding is included in width */
-    flex-direction: row; /* Layout buttons in a row */
-    justify-content: center; /* Center buttons horizontally */
-    flex-wrap: wrap; /* Wrap buttons to next line if they don't fit */
-  }
-
-  .left-sidebar a {
-    margin: 5px; /* Spacing between buttons */
-    flex-grow: 1; /* Buttons grow to fill space */
-    text-align: center; /* Center text in buttons */
-  }
-
-  .right-move-tracker {
-    order: 3; /* Ensures move tracker comes last */
-    width: 100%;
-    margin-top: 10px; /* Space between sidebar and move tracker */
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  /* Ensure that the overlay does not cover the content */
-  .overlay {
-    position: absolute; /* or 'static' depending on your layout needs */
-    width: 100%; /* Full width */
-    top: 0;
-    right: 0; /* Reset right position */
-    height: auto; /* Adjust height as necessary */
-    z-index: 10; /* Lower z-index if it should not cover other elements */
-  }
-
-  /* Adjustments for the hamburger menu */
-  .hamburger {
-    display: block; /* Show hamburger */
-    margin-left: auto; /* Align to the right */
-  }
-}
  
 
 
