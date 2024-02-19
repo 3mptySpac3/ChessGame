@@ -7,11 +7,50 @@ document.addEventListener('DOMContentLoaded', function(){
 
 var board = Chessboard('myBoard', config);
 var game = new Chess();
-console.log(game); // Check the logged output for available methods
+var computerPlayer = false; // Track if the computer is playing
+var playerColor = 'w'; // Default player color
 
 var $status = $('#status');
 var $fen = $('#fen');
 var $pgn = $('#pgn');
+
+// Function to handle computer move
+function makeRandomMove () {
+  var possibleMoves = game.moves();
+
+  // game over or not computer's turn
+  if (possibleMoves.length === 0 || game.turn() !== playerColor) return;
+
+  var randomIdx = Math.floor(Math.random() * possibleMoves.length);
+  game.move(possibleMoves[randomIdx]);
+  board.position(game.fen());
+  updateStatus();
+}
+
+// Toggle computer player
+function toggleComputerPlayer() {
+  computerPlayer = !computerPlayer;
+  // If its computer's turn right after toggling, make a move
+  if (computerPlayer && game.turn() !== playerColor) {
+    makeRandomMove();
+  }
+  updateStatus();
+}
+
+// This function is called to choose the player's color
+function chooseColor(color) {
+  playerColor = color;
+  board.orientation(playerColor); // This sets the board orientation to the chosen color
+  if (computerPlayer && game.turn() !== playerColor) {
+      makeRandomMove();
+  }
+}
+
+
+  // Add event listeners for the new buttons
+  document.getElementById('playComputerBtn').addEventListener('click', toggleComputerPlayer);
+  document.getElementById('chooseWhiteBtn').addEventListener('click', function() { chooseColor('w'); });
+  document.getElementById('chooseBlackBtn').addEventListener('click', function() { chooseColor('b'); });
 
 function onDragStart( piece) {
   // Do not pick up pieces if the game is over
@@ -43,6 +82,11 @@ function onDrop(source, target) {
     return 'snapback';
   }
 
+  // Call makeRandomMove only if computerPlayer is enabled
+  if (computerPlayer) {
+    window.setTimeout(makeRandomMove, 250);
+  }
+
   updateStatus();
 }
 
@@ -70,6 +114,8 @@ function updateStatus() {
   var status = '';
   var moveColor = game.turn() === 'b' ? 'Black' : 'White';
 
+  var computerStatus = computerPlayer ? 'Computer is playing' : 'Computer is not playing';
+    $('#computerStatus').html(computerStatus);
 
   // Remove red glow from any square
   $('.square-55d63').removeClass('in-check');
@@ -106,7 +152,6 @@ function updateStatus() {
   $fen.html(game.fen());
   $pgn.html(game.pgn());
 
-  
 }
 
 function removeGraySquares(){
@@ -117,7 +162,7 @@ function graySquare(square){
   $('#myBoard .square-' + square).addClass('highlight')
 }
 
-function onMouseoverSquare(square, piece){
+function onMouseoverSquare(square){
   // Get list of possible moves for this square
   var moves = game.moves({
     square: square,
@@ -138,7 +183,7 @@ function onMouseoverSquare(square, piece){
 
 }
 
-function onMouseoutSquare(square, piece){
+function onMouseoutSquare(){
   removeGraySquares()
 }
 
@@ -180,24 +225,31 @@ $('#toggleOrientationBtn').on('click', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function(){
-  // Add event listeners for the burger icon
-  document.getElementById('burger').addEventListener('click', function(){
-    var overlay = document.getElementById('overlay');
+  var burger = document.getElementById('burger');
+  var overlay = document.getElementById('overlay');
 
-    if (overlay.style.display === 'none'){
-      overlay.style.display = 'block';
-    }else{
-      overlay.style.display = 'none';
-    }
+  burger.addEventListener('click', function(){
+    overlay.style.display = (overlay.style.display === 'block') ? 'none' : 'block';
   });
 
+  // Close the overlay when clicking anywhere except the burger
   window.addEventListener('click', function(e) {
-    var overlay = document.getElementById('overlay');
     if (e.target === overlay){
       overlay.style.display = 'none';
     }
   });
+
+  // Prevent clicks on the burger from propagating to the window
+  burger.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
 });
+
+burger.addEventListener('click', function(e){
+  e.stopPropagation();
+  overlay.style.display = (overlay.style.display === 'block') ? 'none' : 'block';
+});
+
 
 
 

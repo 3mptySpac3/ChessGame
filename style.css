@@ -87,6 +87,7 @@ body, html {
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 24px;
+  z-index: 101; /* Higher than the overlay */
 }
 
 .overlay {
@@ -100,17 +101,35 @@ body, html {
 }
 
 .left-sidebar {
-  position: fixed; /* Fixed position will make the sidebar stay in place on scroll */
+  float: left;
+  position: relative; /* Fixed position will make the sidebar stay in place on scroll */
   top: 0; /* Align to the top */
   bottom: 0; /* Stretch to the bottom */
   left: 0; /* Align to the left side */
   width: 10%; /* Take up 10% of the horizontal space */
+  height: 90%; /* Take up the full height of the screen */
   display: flex;
   flex-direction: column;
   justify-content: center; /* Space out the content vertically */
   align-items: center;
   padding: 10px;
   border-right: black 1px solid;
+}
+
+.left-sidebar button{
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container{
+  overflow: hidden;
 }
 
 .btn-link {

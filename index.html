@@ -13,22 +13,24 @@
   <div class="header">
     Header
     <div id="burger" class="burger">&#9776;</div>
-    <div class="overlay" id="overlay" style="display: none;"></div>
   </div>
+  <div class="overlay" id="overlay" style="display: none;"></div>
+  
 
 
     <div class="left-sidebar">
-      Pending
+      <button id="startBtn">Start Game</button>
+      <button id="clearBtn">Clear Board</button>
+      <button id="toggleOrientationBtn">Toggle Orientation</button>
+      <button id="playComputerBtn">Play Against Computer</button>
+      <button id="chooseWhiteBtn">Play as White</button>
+      <button id="chooseBlackBtn">Play as Black</button>
     </div>
 
     <div class="main-content">
 
       <div class="chessboard-container">
-        <div class="button-container">
-          <button id="startBtn">Start Game</button>
-          <button id="clearBtn">Clear Board</button>
-          <button id="toggleOrientationBtn">Toggle Orientation</button>
-      </div>
+      <div id="computerStatus"></div>
           <div id="myBoard" style="width: 400px"></div>
           <div class="right-move-tracker">
               <div>
