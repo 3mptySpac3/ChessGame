@@ -71,6 +71,7 @@ body::-webkit-scrollbar {
 
 body, html {
   height: 100%; /* Give a specific height to the body to allow percentage heights for children */
+  background-color: #fcfcfc;
 }
 
 /* body{
@@ -170,14 +171,14 @@ cursor:pointer;
   &:after{
     top:-1px;
     left:-1px;
-    border-top:5px solid #E9ECFF;
-    border-left:5px solid #E9ECFF;
+    border-top:5px solid #9B7B79;
+    border-left:5px solid #9B7B79;
   }
   &:before{
     bottom:-1px;
     right:-1px;
-    border-bottom:5px solid #DEFFFA;
-    border-right:5px solid #DEFFFA;
+    border-bottom:5px solid #C1B7AC;
+    border-right:5px solid #C1B7AC;
   }
   &:hover{
     border-top-right-radius:0px;
@@ -270,7 +271,7 @@ cursor:pointer;
  /* Space out the content vertically */
 	align-items: center;
 	padding: 10px;
-  background-color: #ffffff;
+  background-color: #fcfcfc;
 }
 
 .left-sidebar button {
@@ -325,38 +326,39 @@ button {
 	align-items: center;
 }
 
+
 .right-move-tracker {
-	width: 20%;
- /* Or 10%, adjust as needed */
-	height: auto;
- /* Let it define its height by its content, or set a specific height if needed */
-	border: 1px solid #000;
-	padding: 10px;
-  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  width: 20%;
+  height: auto;
+  border: 1px solid #000;
+  padding: 10px;
+  box-shadow: #9B7B79 2.4px 2.4px 3.2px;
   margin-right: 2%;
+  transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+.right-move-tracker:hover {
+  box-shadow: #C1B7AC 0px 4px 10px; /* Change the box-shadow for a hover effect */
+  border-color: black; /* Change the border color on hover */
 }
 
 .chessboard-container {
 	display: flex;
- /* This makes children (chessboard and move tracker) align horizontally */
- /* Center the content horizontally */
 	align-items: flex-start;
  /* Align the content to the top */
-	width: 50vw;
-
-
+	width: 100%;
+  justify-content: space-between;
 }
 
 #myBoard {
-  width: 70vw; 
-  max-width: 60%; /* Maximum size */
+  width: 30vw; 
+  max-width: 600px; /* Maximum size */
   margin: 0 auto;
-  box-shadow: #473628 0px 0px 10px;
   transition: box-shadow 0.3s ease-in-out;
 }
 
 #myBoard:hover {
-  box-shadow: black 0px 0px 10px;
+  box-shadow: 0 0 10px white;
 }
 
 
@@ -375,15 +377,15 @@ button {
  
 .type--A{
   --line_color : #555555 ;
-  --back_color : #FFECF6  ;
+  --back_color : #CEAAAA  ;
 }
 .type--B{
   --line_color : #1b1919 ;
-  --back_color : #E9ECFF
+  --back_color : #A8C9B2
 }
 .type--C{
   --line_color : #00135C ;
-  --back_color : #DEFFFA 
+  --back_color : #AA919A 
 }
 .button{
     position : relative ;
@@ -396,7 +398,7 @@ button {
     color : var(--line_color) ;
     letter-spacing : 2px ;
     transition : all .3s ease ;
-    margin-left: 30px;
+    margin-left: 60px;
 }
 .button__text{
     display : flex ;
