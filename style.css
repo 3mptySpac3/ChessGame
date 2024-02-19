@@ -1,18 +1,15 @@
-
-
-body::-webkit-scrollbar{
-  display: none;
+body::-webkit-scrollbar {
+	display: none;
 }
 
-:root{
-  --gameboard-size: calc(100vmin - 100px);
+:root {
+	--gameboard-size: calc(100vmin - 100px);
 }
-
 
 .button-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
 }
 
 
@@ -27,42 +24,52 @@ body::-webkit-scrollbar{
 
 /* Buttons - optional styling */
 button {
-  margin: 5px;
-  padding: 10px;
-  font-size: 1rem; /* Responsive font size */
-  cursor: pointer;
-  background-color: white;
-  border: none;
+	margin: 5px;
+	padding: 10px;
+	font-size: 1rem;
+ /* Responsive font size */
+	cursor: pointer;
+	background-color: white;
+	border: none;
 }
 
 
 /* Legal move highlighting */
-.square-55d63::before{
-  content: '';
-  position: absolute;
-  width: 15px; /*dot size*/
-  height: 15px; /*dot size*/
-  background-color: rgba(79, 79, 79, 0.368); /* gray color with 50% opacity */
-  border-radius: 50%; /*shape of dot...round*/
-  top: 50%; /*position of dot*/
-  left: 50%; /*position of dot*/
-  transform: translate(-50%, -50%); /*position of dot*/
-  display: none; /*hides dot*/
+.square-55d63::before {
+	content: '';
+	position: absolute;
+	width: 15px;
+ /*dot size*/
+	height: 15px;
+ /*dot size*/
+	background-color: rgba(79, 79, 79, 0.368);
+ /* gray color with 50% opacity */
+	border-radius: 50%;
+ /*shape of dot...round*/
+	top: 50%;
+ /*position of dot*/
+	left: 50%;
+ /*position of dot*/
+	transform: translate(-50%, -50%);
+ /*position of dot*/
+	display: none;
+ /*hides dot*/;
 }
 
 .square-55d63.highlight::before {
-  display: block; /* Show the dot when highlighting */
+	display: block;
+ /* Show the dot when highlighting */;
 }
 
-
 .square-55d63.in-check {
-  box-shadow: 0 0 10px rgb(255, 0, 0);
+	box-shadow: 0 0 10px rgb(255, 0, 0);
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; /* This ensures padding doesn't affect the overall width */
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+ /* This ensures padding doesn't affect the overall width */
 }
 
 body, html {
@@ -97,84 +104,102 @@ body, html {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  z-index: 100; /* Make sure it's above everything else */
+  z-index: 100; /* Make sure it's above everything else */;
 }
 
 .left-sidebar {
-  float: left;
-  position: relative; /* Fixed position will make the sidebar stay in place on scroll */
-  top: 0; /* Align to the top */
-  bottom: 0; /* Stretch to the bottom */
-  left: 0; /* Align to the left side */
-  width: 10%; /* Take up 10% of the horizontal space */
-  height: 90%; /* Take up the full height of the screen */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Space out the content vertically */
-  align-items: center;
-  padding: 10px;
-  border-right: black 1px solid;
+	float: left;
+	position: relative;
+ /* Fixed position will make the sidebar stay in place on scroll */
+	top: 0;
+ /* Align to the top */
+	bottom: 0;
+ /* Stretch to the bottom */
+	left: 0;
+ /* Align to the left side */
+	width: 10%;
+ /* Take up 10% of the horizontal space */
+	height: 90%;
+ /* Take up the full height of the screen */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+ /* Space out the content vertically */
+	align-items: center;
+	padding: 10px;
+	border-right: black 1px solid;
 }
 
-.left-sidebar button{
-  display: block;
-  width: 100%;
-  margin-bottom: 10px;
+.left-sidebar button {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
 }
 
 .clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+	content: "";
+	clear: both;
+	display: table;
 }
 
-.container{
-  overflow: hidden;
+.container {
+	overflow: hidden;
 }
 
 .btn-link {
-  display: block; /* Make the link fill the container */
-  margin: 10px 0; /* Space between links */
-  padding: 10px 20px; /* Padding inside links */
-  text-align: center; /* Center text */
-  color: #000; /* Button text color */
-  text-decoration: none; /* Remove underline from links */
-  border-radius: 4px; /* Rounded corners */
+	display: block;
+ /* Make the link fill the container */
+	margin: 10px 0;
+ /* Space between links */
+	padding: 10px 20px;
+ /* Padding inside links */
+	text-align: center;
+ /* Center text */
+	color: #000;
+ /* Button text color */
+	text-decoration: none;
+ /* Remove underline from links */
+	border-radius: 4px;
+ /* Rounded corners */;
 }
 
-
-
 .main-content {
-  margin-left: 10%; /* Make the main content start after the sidebar */
-  margin-top: 5%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	margin-left: 10%;
+ /* Make the main content start after the sidebar */
+	margin-top: 5%;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .right-move-tracker {
-  width: 20%; /* Or 10%, adjust as needed */
-  height: auto; /* Let it define its height by its content, or set a specific height if needed */
-  border: 1px solid #000;
-  padding: 10px;
-  box-shadow: -2px 0px 5px rgba(0,0,0,0.2);
-  margin-right: 2%;
- 
+	width: 20%;
+ /* Or 10%, adjust as needed */
+	height: auto;
+ /* Let it define its height by its content, or set a specific height if needed */
+	border: 1px solid #000;
+	padding: 10px;
+	box-shadow: -2px 0px 5px rgba(0,0,0,0.2);
+	margin-right: 2%;
 }
 
 .chessboard-container {
-  display: flex;
-  flex-direction: row; /* This makes children (chessboard and move tracker) align horizontally */
-  justify-content: space-between; /* Center the content horizontally */
-  align-items: flex-start; /* Align the content to the top */
-  width: 100%; /* Full width of the main-content */
+	display: flex;
+	flex-direction: row;
+ /* This makes children (chessboard and move tracker) align horizontally */
+	justify-content: space-between;
+ /* Center the content horizontally */
+	align-items: flex-start;
+ /* Align the content to the top */
+	width: 100%;
+ /* Full width of the main-content */;
 }
 
 #myBoard {
   /* Adjust width as needed, keeping in mind the size of the move tracker */
-  width: 400px; /* This will be the actual width of the chessboard */
-  margin: 0 auto; /* Center the chessboard */
+	width: 400px;
+ /* This will be the actual width of the chessboard */
+	margin: 0 auto;
+ /* Center the chessboard */;
 }
-
-
