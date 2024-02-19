@@ -10,17 +10,37 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Chess Game</h1>
-    <div class="button-container">
+  <div class="header">
+    Header
+    <div id="burger" class="burger">&#9776;</div>
+  </div>
+  <div class="overlay" id="overlay" style="display: none;"></div>
+  
+
+
+    <div class="left-sidebar">
       <button id="startBtn">Start Game</button>
       <button id="clearBtn">Clear Board</button>
+      <button id="toggleOrientationBtn">Toggle Orientation</button>
+      <button id="playComputerBtn">Play Against Computer</button>
+      <button id="chooseWhiteBtn">Play as White</button>
+      <button id="chooseBlackBtn">Play as Black</button>
     </div>
-    <div class="chess-container">
-      <div id="myBoard" style="width: 400px"></div>
+
+    <div class="main-content">
+
+      <div class="chessboard-container">
+      <div id="computerStatus"></div>
+          <div id="myBoard" style="width: 400px"></div>
+          <div class="right-move-tracker">
+              <div>
+                  <div id="status"></div>
+                  <div id="pgn"></div>
+              </div>
+          </div>
+      </div>
     </div>
-    <div id="status"></div>
-    <div id="fen"></div>
-    <div id="pgn"></div>
+  
 
     <!-- Include chessboard.js (Uncomment if needed) -->
     <script src="./chessboardjs-1.0.0/js/chessboard-1.0.0.min.js"></script>

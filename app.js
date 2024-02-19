@@ -5,11 +5,53 @@ var board = Chessboard('myBoard', config);
 var game = new Chess();
 console.log(game); // Check the logged output for available methods
 
+var computerPlayer = false; // Track if the computer is playing
+var playerColor = 'w'; // Default player color
+
 var $status = $('#status');
 var $fen = $('#fen');
 var $pgn = $('#pgn');
 
-function onDragStart(source, piece, position, orientation) {
+// Function to handle computer move
+function makeRandomMove () {
+  var possibleMoves = game.moves();
+
+  // game over or not computer's turn
+  if (possibleMoves.length === 0 || game.turn() !== playerColor) return;
+
+  var randomIdx = Math.floor(Math.random() * possibleMoves.length);
+  game.move(possibleMoves[randomIdx]);
+  board.position(game.fen());
+  updateStatus();
+}
+
+// Toggle computer player
+function toggleComputerPlayer() {
+  computerPlayer = !computerPlayer;
+  // If its computer's turn right after toggling, make a move
+  if (computerPlayer && game.turn() !== playerColor) {
+    makeRandomMove();
+  }
+  updateStatus();
+}
+
+// This function is called to choose the player's color
+function chooseColor(color) {
+  playerColor = color;
+  board.orientation(playerColor); // This sets the board orientation to the chosen color
+  if (computerPlayer && game.turn() !== playerColor) {
+      makeRandomMove();
+  }
+}
+
+ // Add event listeners for the new buttons
+  document.getElementById('playComputerBtn').addEventListener('click', toggleComputerPlayer);
+  document.getElementById('chooseWhiteBtn').addEventListener('click', function() { chooseColor('w'); });
+  document.getElementById('chooseBlackBtn').addEventListener('click', function() { chooseColor('b'); });
+
+
+
+function onDragStart(source, piece, ) {
   // Do not pick up pieces if the game is over
   if (game.isGameOver()) return false;
 
