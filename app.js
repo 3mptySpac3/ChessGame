@@ -221,9 +221,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	  // Listen for keydown event
 		document.addEventListener('keydown', function(e) {
-			// Check if the 'Space' key was pressed
-			if (e.key === ' ' || e.key === 'Space') {
-				// Prevent default action to avoid any unwanted behavior
+			// Check if the Space bar key was pressed
+			if (e.key === ' ' || e.code === 'Space') {
+				// Prevent default action to avoid scrolling the page
 				e.preventDefault();
 				// Trigger the same functionality as the orientation button
 				var currentOrientation = board.orientation();
