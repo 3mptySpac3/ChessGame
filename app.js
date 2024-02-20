@@ -30,10 +30,31 @@ document.addEventListener('DOMContentLoaded', function() {
       // Clear board code...
     });
 
-	function playMoveSound() {
-		var sound = document.getElementById("move-sound");
-		sound.play();
-	}
+// Define all the sound playing functions
+function playMoveSound() {
+  var sound = document.getElementById("move-sound");
+  sound.play();
+}
+
+function playCaptureSound() {
+  var sound = document.getElementById("capture-sound");
+  sound.play();
+}
+
+function playCheckSound() {
+  var sound = document.getElementById("check-sound");
+  sound.play();
+}
+
+function playCastleSound() {
+  var sound = document.getElementById("castle-sound");
+  sound.play();
+}
+
+function playPromotionSound() {
+  var sound = document.getElementById("promotion-sound");
+  sound.play();
+}
 
 	// Function to handle computer move
 	function makeRandomMove() {
@@ -80,6 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 
+
+
+
 	function onDrop(source, target) {
 		// Check if the target is "offboard" and silently ignore the move
 		if(source === target) {
@@ -97,11 +121,32 @@ document.addEventListener('DOMContentLoaded', function() {
 			console.log(error.message); // This logs to the console instead of throwing an error that would trigger the overlay
 			return 'snapback';
 		}
-		// Call makeRandomMove only if computerPlayer is enabled
-		if(computerPlayer) {
-			window.setTimeout(makeRandomMove, 250);
+
+	
+		// If the move was illegal, snap the piece back
+		if (move === null) return 'snapback';
+	
+		// Play sound based on the move type
+		if (move.flags.includes('c') && move.flags.includes('p')) {
+			playPromotionSound(); // Play capture sound
 		}
-		playMoveSound();
+		else if (move.flags.includes('c')) {
+			playCaptureSound(); // Play capture sound
+		} else if (move.flags.includes('e')) {
+			playCaptureSound(); // Play capture sound for en passant
+		} else if (move.flags.includes('k') || move.flags.includes('q')) {
+			playCastleSound(); // Play castle sound
+		} else if (move.flags.includes('p')) {
+			playPromotionSound(); // Play promotion sound
+		} else {
+			playMoveSound(); // Play normal move sound
+		}
+	
+		// If it's a check, play the check sound
+		if (game.inCheck()) {
+			playCheckSound();
+		}
+	
 		updateStatus();
 	}
 
