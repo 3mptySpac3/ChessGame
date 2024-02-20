@@ -1,4 +1,8 @@
 # [ChessGame](https://3mptyspac3.github.io/ChessGame/)
+---
+
+# 🧾
+- Press "Space Bar" to toggle orientation 
  
 ---
 
