@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
       // Clear board code...
     });
 
+	function playMoveSound() {
+		var sound = document.getElementById("move-sound");
+		sound.play();
+	}
+
 	// Function to handle computer move
 	function makeRandomMove() {
 		var possibleMoves = game.moves();
@@ -96,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		if(computerPlayer) {
 			window.setTimeout(makeRandomMove, 250);
 		}
+		playMoveSound();
 		updateStatus();
 	}
 
@@ -212,6 +218,19 @@ document.addEventListener('DOMContentLoaded', function() {
 		var newOrientation = currentOrientation === 'white' ? 'black' : 'white';
 		board.orientation(newOrientation);
 	});
+
+	  // Listen for keydown event
+		document.addEventListener('keydown', function(e) {
+			// Check if the 'Space' key was pressed
+			if (e.key === ' ' || e.key === 'Space') {
+				// Prevent default action to avoid any unwanted behavior
+				e.preventDefault();
+				// Trigger the same functionality as the orientation button
+				var currentOrientation = board.orientation();
+				var newOrientation = currentOrientation === 'white' ? 'black' : 'white';
+				board.orientation(newOrientation);
+			}
+		});
 
   document.addEventListener('DOMContentLoaded', function() {
     var burger = document.getElementById('burger');
