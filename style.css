@@ -1,74 +1,581 @@
-
-
-body::-webkit-scrollbar{
+.mobile-only-image {
   display: none;
 }
 
-:root{
-  --gameboard-size: calc(100vmin - 100px);
-}
+/* Media Query for small screens */
+@media (max-width: 600px) {
+  /* Hide regular content */
+  .header, .main-content, .left-sidebar, .right-move-tracker, .overlay, .hamburger {
+    display: none;
+  }
 
+  /* Show the mobile-only image */
+  .mobile-only-image {
+    display: block; /* Or 'flex' or 'grid' if you want to use those display types */
+    width: 100%; /* Take the full width of the screen */
+    height: 100%; /* Optional: Takes the full height of the viewport */
+    position: absolute; /* Position it over other content */
+    top: 0;
+    left: 0;
+    z-index: 10; /* Make sure it's on top of other elements */
+  }
 
-/* This is the base styling for the container */
-.chess-container {
-  position: relative;
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.button-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-  margin-top: 0;
-}
-
-#board2 {
-  max-width: 95vw; /* Limits the size on very wide screens */
-  width: auto; /* Allows it to grow and shrink */
-  height: auto; /* Keeps the aspect ratio */
-}
-
-/* Mobile and small screens */
-@media (max-width: 500px) {
-  #board2 {
-    width: 90vw; /* Takes up a greater width on small screens */
-    height: 90vw; /* Height matches width to maintain aspect ratio */
+  .mobile-only-image img {
+    width: 100%; /* Stretch the image to fill the container */
+    height: 100%; /* Keep the aspect ratio */
   }
 }
 
-/* Buttons - optional styling */
-button {
-  margin: 5px;
-  padding: 10px;
-  font-size: 1rem; /* Responsive font size */
+
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+:root {
+	--gameboard-size: calc(100vmin - 100px);
+}
+
+
+
+
+ 
+
+
+
+body, html {
+  height: 100%; /* Give a specific height to the body to allow percentage heights for children */
+  background-color: #fcfcfc;
+}
+
+/* body{
+  display: flex;
+  flex-direction: column;
+align-items: center;
+} */
+
+/* .left-sidebar,
+.main-content,
+.right-move-tracker {
+  width: 100%; /* Full width on smaller screens */
+/* } */
+
+.button-container {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
 }
 
 
 /* Legal move highlighting */
-.square-55d63::before{
-  content: '';
-  position: absolute;
-  width: 15px; /*dot size*/
-  height: 15px; /*dot size*/
-  background-color: rgba(79, 79, 79, 0.368); /* gray color with 50% opacity */
-  border-radius: 50%; /*shape of dot...round*/
-  top: 50%; /*position of dot*/
-  left: 50%; /*position of dot*/
-  transform: translate(-50%, -50%); /*position of dot*/
-  display: none; /*hides dot*/
+.square-55d63::before {
+	content: '';
+	position: absolute;
+	width: 15px;
+ /*dot size*/
+	height: 15px;
+ /*dot size*/
+	background-color: rgba(79, 79, 79, 0.503);
+ /* gray color with 50% opacity */
+	border-radius: 50%;
+ /*shape of dot...round*/
+	top: 50%;
+ /*position of dot*/
+	left: 50%;
+ /*position of dot*/
+	transform: translate(-50%, -50%);
+ /*position of dot*/
+	display: none;
+ /*hides dot*/;
 }
 
 .square-55d63.highlight::before {
-  display: block; /* Show the dot when highlighting */
+	display: block;
+ /* Show the dot when highlighting */;
+}
+
+.square-55d63.in-check {
+	box-shadow: 0 0 10px rgb(255, 0, 0);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+ /* This ensures padding doesn't affect the overall width */
 }
 
 
-.square-55d63.in-check {
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10%; /* Make the main content start after the sidebar */
+  width: 90%;
+  height: 10%;
+  padding: 10px 10px;
+  position: relative;
+  font-size: 50px;
+  font-family: 'Courier New', Courier, monospace;
+  color:black;
+}
+
+
+
+.t-btn{
+cursor:pointer;
+  position:relative;
+  padding:10px 20px;
+  background:rgba(255, 255, 255, 0.27);
+  font-size:28px;
+  border-top-right-radius:10px;
+  border-bottom-left-radius:10px;
+  transition:all 1s;
+  &:after,&:before{
+    content:" ";
+    width:10px;
+    height:10px;
+    position:absolute;
+    border :0px solid red;
+    transition:all 1s;
+    }
+  &:after{
+    top:-1px;
+    left:-1px;
+    border-top:5px solid #9B7B79;
+    border-left:5px solid #9B7B79;
+  }
+  &:before{
+    bottom:-1px;
+    right:-1px;
+    border-bottom:5px solid #C1B7AC;
+    border-right:5px solid #C1B7AC;
+  }
+  &:hover{
+    border-top-right-radius:0px;
+  border-bottom-left-radius:0px;
+    &:before,&:after{
+      
+      width:100%;
+      height:100%;
+    }
+  }
+}
+
+.title-container{
+  justify-content:center;
+  align-items:center;
+}
+
+.hamburger {
+  cursor: pointer;
+  width: 36px;
+  height: 24px;
+}
+
+.hamburger__container {
+  position: relative;
+  padding-right: 10px;
+}
+
+.hamburger__inner {
+  background-color: #333; /* Color of the hamburger lines */
+  height: 2px; /* Height of the lines */
+  margin: 6px 0; /* Spacing between the lines */
+  transition: transform 0.4s ease;
+}
+
+/* Hover effect for lines */
+.hamburger:hover .hamburger__inner:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger:hover .hamburger__inner:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger:hover .hamburger__inner:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Active state */
+.hamburger.active .hamburger__inner:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active .hamburger__inner:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .hamburger__inner:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: -30%; /* Start off-screen to the right */
+  width: 30%; /* Take up 30% of the screen width */
+  height: 100vh;
+  background-color: red; /* Background color changed to red for visibility */
+  z-index: 100;
+  transition: right 0.3s ease-in-out; /* Animate the right property */
+}
+
+.left-sidebar {
+	float: left;
+	position: relative;
+ /* Fixed position will make the sidebar stay in place on scroll */
+	top: 0;
+ /* Align to the top */
+	bottom: 0;
+ /* Stretch to the bottom */
+	left: 0;
+ /* Align to the left side */
+	width: 10%;
+ /* Take up 10% of the horizontal space */
+	height: 90%;
+ /* Take up the full height of the screen */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+ /* Space out the content vertically */
+	align-items: center;
+	padding: 10px;
+  background-color: #fcfcfc;
+}
+
+.left-sidebar button {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+/* Buttons - optional styling */
+button {
+	margin: 5px;
+	padding: 10px;
+	font-size: 1rem;
+ /* Responsive font size */
+	cursor: pointer;
+}
+
+.clearfix::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+.container {
+	overflow: hidden;
+}
+
+.btn-link {
+	display: block;
+ /* Make the link fill the container */
+	margin: 10px 0;
+ /* Space between links */
+	padding: 10px 20px;
+ /* Padding inside links */
+	text-align: center;
+ /* Center text */
+	color: #000;
+ /* Button text color */
+	text-decoration: none;
+ /* Remove underline from links */
+	border-radius: 4px;
+ /* Rounded corners */;
+}
+
+.main-content {
+	margin-left: 10%;
+ /* Make the main content start after the sidebar */
+	margin-top: 5%;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+
+.right-move-tracker {
+  width: 20%;
+  height: auto;
+  border: 1px solid #000;
+  padding: 10px;
+  box-shadow: #9B7B79 2.4px 2.4px 3.2px;
+  margin-right: 2%;
+  transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+.right-move-tracker:hover {
+  box-shadow: #C1B7AC 0px 4px 10px; /* Change the box-shadow for a hover effect */
+  border-color: black; /* Change the border color on hover */
+}
+
+.chessboard-container {
+	display: flex;
+	align-items: flex-start;
+ /* Align the content to the top */
+	width: 100%;
+  justify-content: space-between;
+}
+
+#myBoard {
+  width: 30vw; 
+  max-width: 600px; /* Maximum size */
+  margin: 0 auto;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+#myBoard:hover {
+  box-shadow: 0 0 10px white;
+}
+
+
+
+#computerStatus{
+  color: black;
+}
+
+
+
+/****************************************************
+ * Cool Button Styles
+ ****************************************************/
+
+
+ 
+.type--A{
+  --line_color : #555555 ;
+  --back_color : #CEAAAA  ;
+}
+.type--B{
+  --line_color : #1b1919 ;
+  --back_color : #A8C9B2
+}
+.type--C{
+  --line_color : #00135C ;
+  --back_color : #AA919A 
+}
+.button{
+    position : relative ;
+    z-index : 0 ;
+    width : 150px ;
+    height : 60px ;
+    text-decoration : none ;
+    font-size : 14px ; 
+    font-weight : bold ;
+    color : var(--line_color) ;
+    letter-spacing : 2px ;
+    transition : all .3s ease ;
+    margin-left: 60px;
+}
+.button__text{
+    display : flex ;
+    justify-content : center ;
+    align-items : center ;
+    width : 100% ;
+    height : 100% ;
+}
+.button::before,
+.button::after,
+.button__text::before,
+.button__text::after{
+    content : '' ;
+    position : absolute ;
+    height : 3px ;
+    border-radius : 2px ;
+    background : var(--line_color) ;
+    transition : all .5s ease ;
+}
+.button::before{
+    top : 0 ;
+    left : 54px ;
+    width : calc( 100% - 56px * 2 - 16px ) ;
+}
+.button::after{
+    top : 0 ;
+    right : 54px ;
+    width : 8px ;
+}
+.button__text::before{
+    bottom : 0 ;
+    right : 54px ;
+    width : calc( 100% - 56px * 2 - 16px ) ;
+}
+.button__text::after{
+    bottom : 0 ;
+    left : 54px ;
+    width : 8px ;
+}
+.button__line{
+    position : absolute ;
+    top : 0 ;
+    width : 56px ;
+    height : 100% ;
+    overflow : hidden ;
+}
+.button__line::before{
+    content : '' ;
+    position : absolute ;
+    top : 0 ;
+    width : 150% ;
+    height : 100% ;
+    box-sizing : border-box ;
+    border-radius : 300px ;
+    border : solid 3px var(--line_color) ;
+}
+.button__line:nth-child(1),
+.button__line:nth-child(1)::before{
+    left : 0 ;
+}
+.button__line:nth-child(2),
+.button__line:nth-child(2)::before{
+    right : 0 ;
+}
+.button:hover{
+    letter-spacing : 6px ;
+}
+.button:hover::before,
+.button:hover .button__text::before{
+    width : 8px ;
+}
+.button:hover::after,
+.button:hover .button__text::after{
+    width : calc( 100% - 56px * 2 - 16px ) ;
+}
+.button__drow1,
+.button__drow2{
+    position : absolute ;
+    z-index : -1 ;
+    border-radius : 16px ;
+    transform-origin : 16px 16px ;
+}
+.button__drow1{
+    top : -16px ;
+    left : 40px ;
+    width : 32px ;
+    height : 0;
+    transform : rotate( 30deg ) ;
+}
+.button__drow2{
+    top : 44px ;
+    left : 77px ;
+    width : 32px ;
+    height : 0 ;
+    transform : rotate(-127deg ) ;
+}
+.button__drow1::before,
+.button__drow1::after,
+.button__drow2::before,
+.button__drow2::after{
+    content : '' ;
+    position : absolute ;
+}
+.button__drow1::before{
+    bottom : 0 ;
+    left : 0 ;
+    width : 0 ;
+    height : 32px ;
+    border-radius : 16px ;
+    transform-origin : 16px 16px ;
+    transform : rotate( -60deg ) ;
+}
+.button__drow1::after{
+    top : -10px ;
+    left : 45px ;
+    width : 0 ;
+    height : 32px ;
+    border-radius : 16px ;
+    transform-origin : 16px 16px ;
+    transform : rotate( 69deg ) ;
+}
+.button__drow2::before{
+    bottom : 0 ;
+    left : 0 ;
+    width : 0 ;
+    height : 32px ;
+    border-radius : 16px ;
+    transform-origin : 16px 16px ;
+    transform : rotate( -146deg ) ;
+}
+.button__drow2::after{
+    bottom : 26px ;
+    left : -40px ;
+    width : 0 ;
+    height : 32px ;
+    border-radius : 16px ;
+    transform-origin : 16px 16px ;
+    transform : rotate( -262deg ) ;
+}
+.button__drow1,
+.button__drow1::before,
+.button__drow1::after,
+.button__drow2,
+.button__drow2::before,
+.button__drow2::after{
+    background : var( --back_color ) ;
+}
+.button:hover .button__drow1{
+    animation : drow1 ease-in .06s ;
+    animation-fill-mode : forwards ;
+}
+.button:hover .button__drow1::before{
+    animation : drow2 linear .08s .06s ;
+    animation-fill-mode : forwards ;
+}
+.button:hover .button__drow1::after{
+    animation : drow3 linear .03s .14s ;
+    animation-fill-mode : forwards ;
+}
+.button:hover .button__drow2{
+    animation : drow4 linear .06s .2s ;
+    animation-fill-mode : forwards ;
+}
+.button:hover .button__drow2::before{
+    animation : drow3 linear .03s .26s ;
+    animation-fill-mode : forwards ;
+}
+.button:hover .button__drow2::after{
+    animation : drow5 linear .06s .32s ;
+    animation-fill-mode : forwards ;
+}
+@keyframes drow1{
+    0%   { height : 0 ; }
+    100% { height : 100px ; }
+}
+@keyframes drow2{
+    0%   { width : 0 ; opacity : 0 ;}
+    10%  { opacity : 0 ;}
+    11%  { opacity : 1 ;}
+    100% { width : 120px ; }
+}
+@keyframes drow3{
+    0%   { width : 0 ; }
+    100% { width : 80px ; }
+}
+@keyframes drow4{
+    0%   { height : 0 ; }
+    100% { height : 120px ; }
+}
+@keyframes drow5{
+    0%   { width : 0 ; }
+    100% { width : 124px ; }
+}
+
+
+.container{
+    width : 10% ;
+    height : 300px ;
+    display : flex ;
+    flex-direction : column ;
+    justify-content : center ;
+    align-items : center ;
+}
+.button:not(:last-child){
+  margin-bottom : 64px ;
 }

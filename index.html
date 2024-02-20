@@ -1,31 +1,85 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Chess Game</title>
-    <!-- Link to chessboard CSS -->
-    <link rel="stylesheet" href="./chessboardjs-1.0.0/css/chessboard-1.0.0.min.css" />
-    <!-- Ensure your custom style.css is correctly linked if needed -->
-    <link rel="stylesheet" href="./style.css" />
-    <!-- Include jQuery from CDN (only once) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-    <h1>Chess Game</h1>
-    <div class="button-container">
-      <button id="startBtn">Start Game</button>
-      <button id="clearBtn">Clear Board</button>
-    </div>
-    <div class="chess-container">
-      <div id="myBoard" style="width: 400px"></div>
-    </div>
-    <div id="status"></div>
-    <div id="fen"></div>
-    <div id="pgn"></div>
 
-    <!-- Include chessboard.js (Uncomment if needed) -->
-    <script src="./chessboardjs-1.0.0/js/chessboard-1.0.0.min.js"></script>
-    <script src="./chessboardjs-1.0.0/js/chessboard-1.0.0.js"></script>
-    <!-- Include your bundled app logic -->
-    <script src="bundle.js"></script>
+<head>
+	<title>JP's Chess Game</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<audio id="move-sound" src="Chessmove.wav" preload="auto"></audio>
+	<!-- Link to chessboard CSS -->
+	<link rel="stylesheet" href="./chessboardjs-1.0.0/css/chessboard-1.0.0.min.css" />
+	<!-- Ensure your custom style.css is correctly linked if needed -->
+	<link rel="stylesheet" href="./style.css" />
+	<!-- Include jQuery from CDN (only once) -->
+	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+	<div class="mobile-only-image">
+		<img src="screensmall.jpg" alt="Mobile View Only">
+	</div>	
+	<div class="header"> 
+    <div class="title-container">
+      <span class="t-btn">JP'Chess.</span>
+    </div>
+    <div id="burger" class="hamburger">
+      <div class="hamburger__container">
+        <div class="hamburger__inner"></div>
+        <div class="hamburger__inner"></div>
+        <div class="hamburger__inner"></div>
+      </div>
+    </div>
+	</div>
+  
+
+	<div class="overlay" id="overlay">
+		<button id="playComputerBtn">Play Against Computer</button>
+		<button id="chooseWhiteBtn">Play as White</button>
+		<button id="chooseBlackBtn">Play as Black</button>
+	</div>
+	<div class="left-sidebar">
+    <a href="#" id="startBtn" class="button type--A">
+      <div class="button__line"></div>
+      <div class="button__line"></div>
+      <span class="button__text">Start Game</span>
+      <div class="button__drow1"></div>
+      <div class="button__drow2"></div>
+    </a>
+    <a href="#" id="toggleOrientationBtn" class="button type--B">
+      <div class="button__line"></div>
+      <div class="button__line"></div>
+      <span class="button__text">Orientation</span>
+      <div class="button__drow1"></div>
+      <div class="button__drow2"></div>
+    </a>
+    <a href="#" id="clearBtn" class="button type--C">
+      <div class="button__line"></div>
+      <div class="button__line"></div>
+      <span class="button__text">Clear Board</span>
+      <div class="button__drow1"></div>
+      <div class="button__drow2"></div>
+    </a>
+	</div>
+	<div class="main-content">
+		<div class="chessboard-container">
+			<div id="computerStatus"></div>
+			<div id="myBoard" ></div>
+			<div class="right-move-tracker">
+				<div>
+					<div id="status"></div>
+					<div id="pgn"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Include chessboard.js (Uncomment if needed) -->
+	<script src="./chessboardjs-1.0.0/js/chessboard-1.0.0.min.js"></script>
+	<script src="./chessboardjs-1.0.0/js/chessboard-1.0.0.js"></script>
+	<!-- Include your bundled app logic -->
+	<script src="bundle.js"></script>
 </body>
+
 </html>
