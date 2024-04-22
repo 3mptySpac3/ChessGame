@@ -12,7 +12,7 @@
 - **Movement**: Moves 1 square in any direction.
 
 ### ♕ Queen
-- **Movement**: Moves any number of squares in any direction.
+- **Movement**: Moves 1 square in any direction, moves any number of squares vertically or horizontally, moves any number of squares diagonally.
 
 ### ♖ Rook
 - **Movement**: Moves any number of squares vertically or horizontally.
